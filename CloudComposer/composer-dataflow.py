@@ -7,8 +7,8 @@ from airflow.operators.python_operator import PythonOperator
 from airflow.contrib.operators.dataflow_operator import DataFlowJavaOperator
 
 SCHEDULE = '0 8 * * *'
-MODULE_NAME = 'gfs-canada-test'
-GCP_PROJECT = 'can-sre-tools-npe-c3ee'
+MODULE_NAME = 'composer-dataflow-test'
+GCP_PROJECT = 'project-test'
 YESTERDAY = datetime.datetime.combine(
     datetime.datetime.today() - datetime.timedelta(1),
     datetime.datetime.min.time())
@@ -27,11 +27,11 @@ default_args = {
         'project': GCP_PROJECT,        
         'region': 'us-east1',
         'workerZone': 'northamerica-northeast1-a',
-        'tempLocation': 'gs://can-sre-tools-npe-gfs-canada/dataflowtemp',
-        'stagingLocation': 'gs://can-sre-tools-npe-gfs-canada/can-sre-tools-npe-billingservice-dataflow-jars',
+        'tempLocation': 'gs://dataflow-bucket/temp',
+        'stagingLocation': 'gs://dataflow-bucket/staging',
         'usePublicIps': 'false',
-        'subnetwork': 'https://www.googleapis.com/compute/v1/projects/efx-gcp-can-svpc-npe-21fe/regions/northamerica-northeast1/subnetworks/can-sre-tools-npe-initial-0',
-        'serviceAccount': 'nscpm-gfs-canada-it-cistocdm@can-sre-tools-npe-c3ee.iam.gserviceaccount.com',
+        'subnetwork': 'https://www.googleapis.com/compute/v1/projects/test/regions/northamerica-northeast1/subnetworks/can-sre-tools-npe-initial-0',
+        'serviceAccount': '',
         'workerMachineType': 'n1-standard-1',
         'autoscalingAlgorithm': 'NONE',
         'defaultWorkerLogLevel': 'ERROR'
@@ -47,7 +47,7 @@ migrationPipelineOptions = {
         'parameters': [
             {
                   'key': 'jar',
-                  'value': 'gs://dataflow-bucket/jars/migration-dataflow-17.0.1.1-bundled.jar'
+                  'value': 'gs://dataflow-bucket/jars/migration-dataflow-1.0.1-bundled.jar'
                }, 
                {
                 'key': 'inputFileFolder',
