@@ -1,7 +1,7 @@
 
 # Cloud Function to trigger dataflow
 
-# Requiremnt
+# Requirement
 java
 maven
 
