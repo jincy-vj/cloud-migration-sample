@@ -54,8 +54,8 @@ migrationPipelineOptions = {
                 'value': 'gs://dataflow-bucket/input/abc.txt'
             },
             {
-                'key': 'GCSProjectId',
-                'value': 'project-test'
+                'key': 'output',
+                'value': 'gs://dataflow-bucket/output'
             },
             
                {
@@ -72,7 +72,7 @@ migrationPipelineOptions = {
 with DAG(MODULE_NAME,
          catchup=False,
          default_args=default_args,
-         schedule_interval=SCHEDULE,
+         schedule_interval=None,
          ) as dag:
     opr_start = BashOperator(task_id='start',
                              bash_command=" echo 'Start!' "
