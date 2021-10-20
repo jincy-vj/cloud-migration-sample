@@ -9,19 +9,13 @@ from airflow.contrib.operators.dataflow_operator import DataFlowJavaOperator
 SCHEDULE = '0 8 * * *'
 MODULE_NAME = 'composer-dataflow-test'
 GCP_PROJECT = 'project-test'
-YESTERDAY = datetime.datetime.combine(
-    datetime.datetime.today() - datetime.timedelta(1),
-    datetime.datetime.min.time())
-
 date_now = datetime.datetime.now()
-CREATED_DATE = date_now.strftime('%Y-%m-%dT%H:%M:%S')
-delete_date_now = date_now - datetime.timedelta(days=1)
-DELETE_DATE = delete_date_now.strftime('%Y-%m-%d')
+
 
 
 default_args = {
     'owner': 'airflow',
-    'start_date': YESTERDAY,
+    'start_date': date_now,
     'concurrency': 1,
     'dataflow_default_options': {
         'project': GCP_PROJECT,        
